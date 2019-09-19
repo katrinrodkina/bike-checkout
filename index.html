@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Bike Rental</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" async></script>
+  </head>
+
+  <body>
+    <header class="main-header">
+      <h1 class="header-text">Bike Rental</h1>
+    </header>
+
+    <div>            
+        <section class="container content-section" >
+            <div id='selectTypeText'> Please select rental type:
+                <select id='selectType'>
+                        <option value="none">...</option>
+                        <option value="bikes">Bikes</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="addons">Addons</option>                      
+                 </select>
+            </div>    
+            <div class="shop-items"></div>
+            
+        </section>
+
+
+        <section class="container content-section">
+                    <h2 class="section-header">SUMMARY</h2>
+
+                    <div class="cart-row">
+                        <span class="cart-item cart-header cart-column">RENTAL ITEM</span>
+                        <span class="cart-price cart-header cart-column">PRICE</span>
+                        <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                    </div>
+
+                    <div class="cart-items"></div>
+
+                    <div class="cart-total">
+                        <strong class="cart-total-title">Total:</strong>
+                        <span class="cart-total-price">$0</span>
+                    </div>
+
+                    <button class="btn btn-primary btn-purchase" type="button">
+                        RESERVE
+                    </button>
+
+
+
+                    
+        </section>
+    </div>
+    
+  </body>
+</html>
