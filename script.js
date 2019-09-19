@@ -4,7 +4,6 @@ if (document.readyState == "loading") {
   ready();
 }
 
-
 var cart = [];
 
 function ready() {
@@ -71,7 +70,9 @@ function ready() {
                   <img class="shop-item-image" src=${bike.image} />
                 
                   <div class="shop-item-details">
-                    <span class="shop-item-price">$${parseFloat(bike.price).toFixed(2)}</span>
+                    <span class="shop-item-price">$${parseFloat(
+                      bike.price
+                    ).toFixed(2)}</span>
                 
                     <button class="btn btn-primary shop-item-button" type="button" id='bikeButton'>
                       SELECT
@@ -104,7 +105,7 @@ function ready() {
       }
 
       document
-        .getElementsByClassName("btn-purchase")[0]
+        .getElementsByClassName("btn-reserve")[0]
         .addEventListener("click", checkOut);
     } else if (types.value === "accessories") {
       const getAccessory = products.filter(
@@ -119,7 +120,9 @@ function ready() {
                 <img class="shop-item-image" src=${accs.image} />
               
                 <div class="shop-item-details">
-                  <span class="shop-item-price">$${parseFloat(accs.price).toFixed(2)}</span>
+                  <span class="shop-item-price">$${parseFloat(
+                    accs.price
+                  ).toFixed(2)}</span>
               
                   <button class="btn btn-primary shop-item-button" type="button" id='accesButton'>
                     SELECT
@@ -152,13 +155,13 @@ function ready() {
       }
 
       document
-        .getElementsByClassName("btn-purchase")[0]
+        .getElementsByClassName("btn-reserve")[0]
         .addEventListener("click", checkOut);
     } else if (types.value === "addons") {
       const getAddon = products.filter(
         product => product.product_type === "addon"
       );
-      const html = `<h2 class="section-header">Addons</h2>
+      const html = `<h2 class="section-header">Add-ons</h2>
         <div class="items-list">
         ${getAddon.map(
           addon => `<div  class="shop-item">
@@ -167,7 +170,9 @@ function ready() {
                   <img class="shop-item-image" src=${addon.image} />
                 
                   <div class="shop-item-details">
-                    <span class="shop-item-price">$${parseFloat(addon.price).toFixed(2)}</span>
+                    <span class="shop-item-price">$${parseFloat(
+                      addon.price
+                    ).toFixed(2)}</span>
                 
                     <button class="btn btn-primary shop-item-button" type="button" id='addonButton'>
                      SELECT
@@ -199,7 +204,7 @@ function ready() {
       }
 
       document
-        .getElementsByClassName("btn-purchase")[0]
+        .getElementsByClassName("btn-reserve")[0]
         .addEventListener("click", checkOut);
     } else if (types.value === "none") {
       const html = `<h2 class="section-header"></h2>
@@ -213,22 +218,17 @@ function ready() {
 }
 
 function checkOut() {
-  if (cart.includes('bikeButton')) {
-    alert("Reservation Completed");
+  if (cart.includes("bikeButton")) {
+    document.getElementById("reservedMessage").style.display = "block";
     var cartItems = document.getElementsByClassName("cart-items")[0];
     while (cartItems.hasChildNodes()) {
-     
       cartItems.removeChild(cartItems.firstChild);
     }
     updateCartTotal();
-    cart=[]
+    cart = [];
+  } else {
+   document.getElementById("errorMessage").style.display = "block";
   }
-  else {
-    alert("You need to select a bike in order to complete reservation");
-  }
-
-  
- 
 }
 
 function removeItem(event) {
@@ -246,7 +246,7 @@ function quantityChanged(event) {
 }
 
 function addToCartClicked(event) {
-  cart.push(event.target.id)
+  cart.push(event.target.id);
   var button = event.target;
   var shopItem = button.parentElement.parentElement;
   var title = shopItem.getElementsByClassName("shop-item-title")[0].innerText;
@@ -263,7 +263,7 @@ function addItemToCart(title, price, imageSrc) {
   var cartItemNames = cartItems.getElementsByClassName("cart-item-title");
   for (var i = 0; i < cartItemNames.length; i++) {
     if (cartItemNames[i].innerText == title) {
-      alert("You already reserved it!");
+      document.getElementById("infoMessage").style.display = "block";
       return;
     }
   }
