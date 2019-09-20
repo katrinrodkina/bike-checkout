@@ -226,6 +226,7 @@ function checkOut() {
     }
     updateCartTotal();
     cart = [];
+    
   } else {
    document.getElementById("errorMessage").style.display = "block";
   }
