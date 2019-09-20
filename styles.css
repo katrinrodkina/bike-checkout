@@ -7,7 +7,6 @@ html, body {
 
 .main-header {
     background-color: #A31A1A;
-    background-image: url("Images/Header Background.jpg");
     padding-bottom: 30px;
     margin-bottom: 20px;
     padding-top: 30px;
@@ -149,7 +148,9 @@ html, body {
     margin-left: .5em;
     font-size: 1.2em;
 }
-
+.cart-item-ID {
+    display:none;
+}
 .cart-item-image {
     width: 75px;
     height: auto;
@@ -234,4 +235,9 @@ html, body {
     border-radius:4px;
 
 
+}
+
+
+.cart-section {
+    display: none;
 }

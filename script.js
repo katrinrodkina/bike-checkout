@@ -232,9 +232,17 @@ function checkOut() {
 }
 
 function removeItem(event) {
+  var parentElem = event.target.parentElement.parentElement
+  var value = parentElem.querySelector('.cart-item-ID').innerHTML
+  var index = cart.indexOf(value);
+  cart.splice(index, 1);
   var buttonClicked = event.target;
   buttonClicked.parentElement.parentElement.remove();
+  if (cart.length<1) {
+    document.querySelector(".cart-section").style.display = "none";
+  }
   updateCartTotal();
+ 
 }
 
 function quantityChanged(event) {
@@ -247,16 +255,17 @@ function quantityChanged(event) {
 
 function addToCartClicked(event) {
   cart.push(event.target.id);
+  eventID =  event.target.id
   var button = event.target;
   var shopItem = button.parentElement.parentElement;
   var title = shopItem.getElementsByClassName("shop-item-title")[0].innerText;
   var price = shopItem.getElementsByClassName("shop-item-price")[0].innerText;
   var imageSrc = shopItem.getElementsByClassName("shop-item-image")[0].src;
-  addItemToCart(title, price, imageSrc);
+  addItemToCart(title, price, imageSrc, eventID);
   updateCartTotal();
 }
 
-function addItemToCart(title, price, imageSrc) {
+function addItemToCart(title, price, imageSrc, eventID) {
   var cartRow = document.createElement("div");
   cartRow.classList.add("cart-row");
   var cartItems = document.getElementsByClassName("cart-items")[0];
@@ -273,6 +282,7 @@ function addItemToCart(title, price, imageSrc) {
             <span class="cart-item-title">${title}</span>
         </div>
         <span class="cart-price cart-column">${price}</span>
+        <span class='cart-item-ID'>${eventID}</span>
         <div class="cart-quantity cart-column">
             <input class="cart-quantity-input" type="number" value="1">
             <button class="btn btn-danger" type="button">REMOVE</button>
@@ -304,4 +314,7 @@ function updateCartTotal() {
   total = Math.round(total * 100) / 100;
   document.getElementsByClassName("cart-total-price")[0].innerText =
     "$" + parseFloat(total).toFixed(2);
+    if (cart.length>=1) {
+      document.querySelector(".cart-section").style.display = "block";
+    }
 }
